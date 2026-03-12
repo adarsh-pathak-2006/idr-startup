@@ -1,4 +1,4 @@
-// --- Initialize DOM Elements ---
+
 const cursorGlow = document.getElementById('cursorGlow');
 const nav = document.querySelector('.nav');
 const mobileToggle = document.getElementById('mobileToggle');
@@ -16,7 +16,6 @@ let mouseY = 0;
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// --- Cursor Glow ---
 if (!prefersReducedMotion && cursorGlow) {
     document.addEventListener('mousemove', function(e) {
         mouseX = e.clientX;
@@ -26,7 +25,6 @@ if (!prefersReducedMotion && cursorGlow) {
     });
 }
 
-// --- Particle System ---
 function initParticles() {
     if (!particleCanvas || prefersReducedMotion) return;
     ctx = particleCanvas.getContext('2d');
@@ -100,7 +98,6 @@ function animateParticles() {
 window.addEventListener('resize', resizeCanvas);
 initParticles();
 
-// --- Navigation ---
 function handleScroll() {
     if (window.scrollY > 50) nav.classList.add('scrolled');
     else nav.classList.remove('scrolled');
@@ -121,7 +118,6 @@ navLinks.querySelectorAll('a').forEach(function(link) {
     });
 });
 
-// --- Reveal on Scroll ---
 function revealOnScroll() {
     const windowHeight = window.innerHeight;
     revealElements.forEach(function(element) {
@@ -131,7 +127,6 @@ function revealOnScroll() {
     });
 }
 
-// --- Counter Animation ---
 function animateCounters() {
     document.querySelectorAll('.stat-number[data-target]').forEach(function(counter) {
         if (counter.getBoundingClientRect().top < window.innerHeight && !counter.classList.contains('counted')) {
@@ -156,7 +151,6 @@ function animateCounters() {
     });
 }
 
-// --- Pipeline Line ---
 function animatePipeline() {
     if (!pipelineLine) return;
     if (pipelineLine.getBoundingClientRect().top < window.innerHeight && !pipelineLine.classList.contains('animate')) {
@@ -164,7 +158,6 @@ function animatePipeline() {
     }
 }
 
-// --- Scroll Listener ---
 if (!prefersReducedMotion) {
     window.addEventListener('scroll', function() {
         revealOnScroll();
@@ -182,7 +175,6 @@ if (!prefersReducedMotion) {
     if(pipelineLine) pipelineLine.classList.add('animate');
 }
 
-// --- Smooth Scroll ---
 document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
         const href = this.getAttribute('href');
@@ -200,7 +192,6 @@ document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     });
 });
 
-// --- Form ---
 contactForm.addEventListener('submit', function(e) {
     e.preventDefault();
     const firstName = document.getElementById('firstName').value.trim();
@@ -239,11 +230,11 @@ contactForm.addEventListener('submit', function(e) {
     }, 1500);
 });
 
-// --- Keyboard ---
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && navLinks.classList.contains('active')) {
         mobileToggle.classList.remove('active');
         navLinks.classList.remove('active');
         mobileToggle.setAttribute('aria-expanded', 'false');
     }
+
 });
